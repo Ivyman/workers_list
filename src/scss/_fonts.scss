@@ -1,26 +1,16 @@
-@font-face {
-  font-family: 'Open Sans';
-  src: url('#{fontPath}/OpenSans-Regular.eot');
-  src: url('#{fontPath}/OpenSans-Regular.eot?#iefix') format('embedded-opentype'),
-  url('#{fontPath}/OpenSans-Regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
+$fontTypes: (
+  ("Regular", "normal"),
+  ("Light", "300"),
+  ("SemiBold", "600")
+);
 
-@font-face {
-  font-family: 'Open Sans';
-  src: url('#{fontPath}/OpenSans-Light.eot');
-  src: url('#{fontPath}/OpenSans-Light.eot?#iefix') format('embedded-opentype'),
-  url('#{fontPath}/OpenSans-Light.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  src: url('#{fontPath}/OpenSans-SemiBold.eot');
-  src: url('#{fontPath}/OpenSans-SemiBold.eot?#iefix') format('embedded-opentype'),
-  url('#{fontPath}/OpenSans-SemiBold.woff') format('woff');
-  font-weight: 600;
-  font-style: normal;
+@each $type in $fontTypes {
+  @font-face {
+    font-family: "Open Sans";
+    src: url("#{$fontPath}/OpenSans-#{nth($type, 1)}.eot");
+    src: url("#{$fontPath}/OpenSans-#{nth($type, 1)}.eot?#iefix") format("embedded-opentype"),
+    url("#{$fontPath}/OpenSans-#{nth($type, 1)}.woff") format("woff");
+    font-weight: #{nth($type, 2)};
+    font-style: normal;
+  }
 }
