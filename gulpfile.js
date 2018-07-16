@@ -27,6 +27,7 @@ const gulp 				= require('gulp'),
 			concat 			= require('gulp-concat'),
 			server			= require('gulp-server-livereload'),
 			del 			  = require('del'),
+			fs 					= require('fs'),
 			runSequence = require('run-sequence');
 
 // CSS plugins
@@ -39,7 +40,8 @@ const JSmin  = require('gulp-jsmin'),
  			coffee = require('gulp-coffee');
 
 // HTML plugins
-const pug = require('gulp-pug');
+const pug = require('gulp-pug'),
+			data = require('gulp-data');
 
 const srcPath   = `${__dirname}/src`,
  			buildPath = `${__dirname}/dist`;
@@ -68,6 +70,9 @@ gulp.task('scripts', function() {
 // Pug
 gulp.task('markup', () => {
 	return gulp.src(`${srcPath}/index.pug`)
+		.pipe(data((file) => {
+			return JSON.parse(fs.readFileSync(`${srcPath}/data.json`))
+		}))
 		.pipe(pug({ pretty: true }))
 		.pipe(gulp.dest(buildPath));
 });
