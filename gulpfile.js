@@ -3,155 +3,108 @@
 // /src 
 //  |_/assets
 //  |   |__/img
-//  |   |__/sass
-//  |   |__/js
+//  |   |__/scss
+//  |   |__/coffee
 //  |_index.pug
 
 
 // build folder
 //
 // :::: path for IMG ::::
-// background: #222 url('/assets/img/tablet.jpg')
+// ex: background: #222 url('/assets/img/tablet.jpg')
 //
 // /build
 //  |_/assets
-//  |   |__/img
-//  |   |__/sass
-//  |   |__/js
+//  |   |__/images
+//  |   |__/styles
+//  |   |__/scripts
 //  |_index.html
           
 
 // Other
-let gulp 			= require('gulp'),
-	watch 			= require('gulp-watch'),
-	concat 			= require('gulp-concat'),
-	rename 			= require('gulp-rename'),
-	server			= require('gulp-server-livereload'),
-	del 			  = require('del'),
-	runSequence = require('run-sequence');
+const gulp 				= require('gulp'),
+			watch 			= require('gulp-watch'),
+			concat 			= require('gulp-concat'),
+			server			= require('gulp-server-livereload'),
+			del 			  = require('del'),
+			runSequence = require('run-sequence');
 
- // CSS plugins
-let CSSmin = require('gulp-clean-css'),
-		sass     = require('gulp-sass'),
- 		uncss    = require('gulp-uncss'),
- 		prefix   = require('gulp-autoprefixer');
+// CSS plugins
+const CSSmin 	 = require('gulp-clean-css'),
+			sass     = require('gulp-sass'),
+ 			prefix   = require('gulp-autoprefixer');
 
- // JS plugins
-let JSmin  = require('gulp-jsmin'),
-    babel  = require('gulp-babel'),
-    JShint = require('gulp-jshint');
+// JS plugins
+const JSmin  = require('gulp-jsmin'),
+ 			coffee = require('gulp-coffee');
 
 // HTML plugins
-let pug     = require('gulp-pug'),
-		HTMLmin = require('gulp-html-minifier');
+const pug = require('gulp-pug');
 
-// IMG plugins
-var imageMin = require('gulp-imagemin');
-
-let srcPath   = './src',
- 		buildPath = './dist';
+const srcPath   = `${__dirname}/src`,
+ 			buildPath = `${__dirname}/dist`;
 
 
-// img
-gulp.task('img', () => {
-	return gulp.src(`${srcPath}/assets/img/*`)
-		.pipe(gulp.dest(`${buildPath}/assets/img`))
-});
-gulp.task('img-build', () => {
-	return gulp.src(`${buildPath}/assets/img/*`)
-		.pipe(imageMin())
-		.pipe(gulp.dest(`${buildPath}/assets/img`))
+// Img
+gulp.task('images', () => {
+	return gulp.src(`${srcPath}/img/*`)
+		.pipe(gulp.dest(`${buildPath}/assets/images`));
 });
 
-// fonts
+// Font
 gulp.task('fonts', () => {
-	return gulp.src(`${srcPath}/assets/fonts/*`)
-		.pipe(gulp.dest(`${buildPath}/assets/fonts`))
+	return gulp.src(`${srcPath}/fonts/*`)
+		.pipe(gulp.dest(`${buildPath}/assets/fonts`));
 });
 
-// js
-gulp.task('js', () => {
-	return gulp.src(`${srcPath}/assets/js/**/*.js`)
-		.pipe(concat('bundle.js'))
-		.pipe(JShint({ esversion: 6 }))
-		.pipe(JShint.reporter()) // set up style errors type
-		.pipe(babel({
-			presets: ['es2015']
-		}))
-		.pipe(gulp.dest(`${buildPath}/assets/js`));
-});
-gulp.task('js-build', () => {
-	return  gulp.src(`${buildPath}/assets/js/*.js`)
+// Coffee
+gulp.task('scripts', function() {
+	gulp.src(`${srcPath}/coffee/**/*.coffee`)
+		.pipe(coffee({bare: true}))
 		.pipe(JSmin())
-		.pipe(gulp.dest(`${buildPath}/assets/js`))
+		.pipe(gulp.dest(`${buildPath}/assets/scripts`));
 });
 
-// pug
-gulp.task('pug', () => {
-	return gulp.src(`${srcPath}/*.pug`)
+// Pug
+gulp.task('markup', () => {
+	return gulp.src(`${srcPath}/index.pug`)
 		.pipe(pug({ pretty: true }))
-		.pipe(gulp.dest(buildPath))
-});
-gulp.task('html-build', () => {
-	return gulp.src(`${buildPath}/*.html`)
-        .pipe(HTMLmin({
-        	collapseWhitespace: true,
-			removeComments: true
-		}))
-		.pipe(gulp.dest(buildPath))
+		.pipe(gulp.dest(buildPath));
 });
 
-// sass
-gulp.task('sass', () => {
-	return gulp.src(`${srcPath}/assets/sass/main.sass`)
+// Scss
+gulp.task('styles', () => {
+	return gulp.src(`${srcPath}/scss/styles.scss`)
 		.pipe(sass()).on('error', sass.logError)
-		.pipe(prefix('last 10 versions'))
-		.pipe(gulp.dest(`${buildPath}/assets/css`));
-});
-gulp.task('css-build', () => {
-	return gulp.src(`${buildPath}/assets/css/*`)
-		.pipe(uncss({
-			html: [`${buildPath}/*.html`]
-		}))
+		.pipe(prefix('last 6 versions'))
 		.pipe(CSSmin())
-		// .pipe(rename({suffix: '.min'}))
-		.pipe(gulp.dest(`${buildPath}/assets/css`))
+		.pipe(gulp.dest(`${buildPath}/assets/styles`));
 });
 
-
-// clean deploy path
+// Clean deploy path
 gulp.task('clean:dist', () => {
 	return del.sync('./dist');
 });
 
-// boxes
-gulp.task('dev-box', ['pug', 'js', 'sass', 'img', 'fonts']);
-gulp.task('prod-box', ['html-build', 'js-build', 'css-build', 'img-build', 'fonts']);
-
-// watch
+// Watch
 gulp.task('watch', () => {
-	gulp.watch([`${srcPath}/assets/sass/**/*.sass`, `${srcPath}/layout/**/*.sass`], ['sass']);
-	gulp.watch(`${srcPath}/**/*.pug`, ['pug']);
-	gulp.watch(`${srcPath}/assets/fonts/**/*`, ['fonts']);
-	gulp.watch(`${srcPath}/assets/js/**/*.js`, ['js']);
-	gulp.watch(`${srcPath}/assets/img/**/*`, ['img']);
+	gulp.watch([`${srcPath}/scss/**/*.scss`, `${srcPath}/layout/**/*.scss`], ['styles']);
+	gulp.watch(`${srcPath}/**/*.pug`, ['markup']);
+	gulp.watch(`${srcPath}/fonts/**/*`, ['fonts']);
+	gulp.watch(`${srcPath}/coffee/**/*.coffee`, ['scripts']);
+	gulp.watch(`${srcPath}/img/**/*`, ['images']);
 });
 
-// server
+// Server
 gulp.task('server', () => {
 	gulp.src(buildPath)
 		.pipe(server({
 			livereload: true,
 			open: true
-		}))
+		}));
 });
 
-// build
-gulp.task('build', () => {
-	runSequence('clean:dist', 'dev-box', 'prod-box')
-});
-
-// dev
+// Dev
 gulp.task('default', () => {
-	runSequence('clean:dist', ['dev-box', 'watch'], 'server')
+	runSequence('clean:dist', ['markup', 'scripts', 'styles', 'images', 'fonts', 'watch'], 'server');
 });
