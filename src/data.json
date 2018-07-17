@@ -5,60 +5,70 @@
   },
   "workers": [
     {
+      "id": 0,
       "avatar": "https://randomuser.me/api/portraits/women/1.jpg",
       "name": "Basia Sołtysińska",
       "position": "Founder",
       "location": "Warsaw"
     },
     {
+      "id": 1,
       "avatar": "https://randomuser.me/api/portraits/men/2.jpg",
       "name": "Włas Chorowiec",
       "position": "Founder",
       "location": "Warsaw"
     },
     {
+      "id": 2,
       "avatar": "https://randomuser.me/api/portraits/women/3.jpg",
       "name": "Edyta Leśniewska",
       "position": "Head of Human Resources",
       "location": "Warsaw"
     },
     {
+      "id": 3,
       "avatar": "https://randomuser.me/api/portraits/women/4.jpg",
       "name": "Joanna Pawluk",
       "position": "Chief Growth Officer (CGO)",
       "location": "London"
     },
     {
+      "id": 4,
       "avatar": "https://randomuser.me/api/portraits/men/5.jpg",
       "name": "David Saunders",
       "position": "Business Development",
       "location": "London"
     },
     {
+      "id": 5,
       "avatar": "https://randomuser.me/api/portraits/men/6.jpg",
       "name": "Adam Eldridge",
       "position": "Business Development Director US",
       "location": "Los Angeles"
     },
     {
+      "id": 5,
       "avatar": "https://randomuser.me/api/portraits/men/7.jpg",
       "name": "Maha Mahda",
       "position": "Chief Business Development Officer (CBDO)",
       "location": "Warsaw"
     },
     {
+      "id": 7,
       "avatar": "https://randomuser.me/api/portraits/women/8.jpg",
       "name": "Elżbieta Kamińska",
       "position": "International Client Service Manager",
       "location": "Warsaw"
     },
     {
+      "id": 8,
       "avatar": "https://randomuser.me/api/portraits/women/9.jpg",
       "name": "Karolina Makuch",
       "position": "Creation Manager",
       "location": "Warsaw"
     },
     {
+      "id": 9,
       "avatar": "https://randomuser.me/api/portraits/men/10.jpg",
       "name": "Kamil Bolek",
       "position": "Head of Communication",
