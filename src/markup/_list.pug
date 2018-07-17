@@ -1,0 +1,14 @@
+article.list
+    for item in workers
+        section.list__item.item
+            a(href="#").item__header
+                i.item__icon
+                img.item__image(src= item.avatar)
+            div.item__body.align-center
+                h3.item__title= item.name
+                p.item__subtitle.blue-text= item.position
+                p.item__subtitle.gray-text= item.location
+    else
+        p.list__no-data.align-center= site.noData
+
+

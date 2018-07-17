@@ -6,12 +6,16 @@ html
         meta(name='description', content='')
         meta(name='viewport', content='width=device-width')
         meta(http-equiv="x-ua-compatible", content="ie=edge")
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.min.css')
         link(rel='stylesheet', href='/assets/styles/styles.css')
     body
         main.main
-            h1.main__title= site.title
+            h1.main__title.align-center= site.title
 
-            include markup/_items.pug
+            .main__content
+                include markup/_list.pug
 
-        include markup/_slider.pug
+                include markup/_slider.pug
+
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/js/swiper.min.js')
         script(src='/assets/scripts/scripts.js')
