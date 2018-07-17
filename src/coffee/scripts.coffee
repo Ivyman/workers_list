@@ -4,15 +4,24 @@ class List
     @docEL = document
     @modalEl = null
     @itemsEL = null
+    @swiper = null
 
   init: () ->
     @modalEl = @docEL.querySelector "[data-modal]"
     @itemsEL = @docEL.querySelectorAll "[data-item]"
+    @swiper = new Swiper ".swiper-container", {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      }
+    }
 
     for item in @itemsEL
       item.addEventListener "click", (e) =>
         e.preventDefault()
-        @triggerModal()
+        itemId = e.target.getAttribute("data-item")
+        if itemId != null
+          @triggerModal(itemId)
         return
 
   triggerModal: (itemId) ->
@@ -22,8 +31,11 @@ class List
       @modalEl.setAttribute("data-modal", "hide")
     @modalIsOpen = !@modalIsOpen
 
-instance = new List()
-instance.init()
+
+window.onload = ->
+  instance = new List()
+  instance.init()
+
 
 
 
