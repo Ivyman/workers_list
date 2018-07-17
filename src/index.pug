@@ -1,0 +1,17 @@
+doctype html
+html
+    head
+        title IndaTeam
+        meta(charset='utf-8')
+        meta(name='description', content='')
+        meta(name='viewport', content='width=device-width')
+        meta(http-equiv="x-ua-compatible", content="ie=edge")
+        link(rel='stylesheet', href='/assets/styles/styles.css')
+    body
+        main.main
+            h1.main__title= site.title
+
+            include markup/_items.pug
+
+        include markup/_slider.pug
+        script(src='/assets/scripts/scripts.js')
