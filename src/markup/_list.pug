@@ -1,7 +1,7 @@
-article.list
+article.list(class= workers.length === 0 ? "list--gridless" : "")
     for item in workers
         section.list__item.item
-            a(href="#").item__header
+            a(href="#", data-item= item.id).item__header
                 i.item__icon
                 img.item__image(src= item.avatar)
             div.item__body.align-center

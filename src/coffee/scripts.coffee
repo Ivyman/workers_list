@@ -10,9 +10,10 @@ class List
     @modalEl = @docEL.querySelector "[data-modal]"
     @itemsEL = @docEL.querySelectorAll "[data-item]"
     @swiper = new Swiper ".swiper-container", {
+      effect: "coverflow",
       navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
       }
     }
 
