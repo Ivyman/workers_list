@@ -9,4 +9,20 @@ $secondFontColor: #808080;
 $max-width: 1300px;
 
 $transition: .3s;
-$boxShadow: 0px 0px 15px 0px rgba(163,163,163,0.89);
+$boxShadow: 0px 0px 15px 0px rgba(163,163,163,1);
+
+$breakPoints: (
+  ("mobile", 768px),
+  ("tablet", 992px),
+  ("desktop", 1200px)
+);
+
+@each $point in $breakPoints {
+  @mixin media-#{nth($point, 1)}() {
+    @media (max-width: nth($point, 2)) {
+      @content;
+    }
+  }
+}
+
+
