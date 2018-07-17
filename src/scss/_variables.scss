@@ -12,14 +12,14 @@ $transition: .3s;
 $boxShadow: 0px 0px 15px 0px rgba(163,163,163,1);
 
 $breakPoints: (
-  ("mobile", 768px),
-  ("tablet", 992px),
-  ("desktop", 1200px)
+  mobile: 768px,
+  tablet: 992px,
+  desktop: 1200px
 );
 
-@each $point in $breakPoints {
-  @mixin media-#{nth($point, 1)}() {
-    @media (max-width: nth($point, 2)) {
+@mixin media($breakpoint) {
+  @if map-has-key($breakPoints, $breakpoint) {
+    @media (max-width: #{map-get($breakPoints, $breakpoint)}) {
       @content;
     }
   }

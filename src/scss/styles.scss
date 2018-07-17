@@ -12,7 +12,7 @@ body {
   padding: 3.5rem 2rem;
   &__title {
     font-size: 3.8rem;
-    margin-bottom: 4rem;
+    margin-bottom: 6rem;
     color: $firstFontColor;
   }
   &__content {
@@ -77,16 +77,11 @@ body {
     overflow: hidden;
     border-radius: 100%;
     display: block;
+    width: 180px;
     height: 180px;
-    img {
-      width: 100%;
-      height: auto;
-    }
   }
   &__title {
-    a {
-      color: $firstFontColor;
-    }
+    color: $firstFontColor;
     margin: 1.7rem 0 1.3rem 0;
   }
   &__subtitle {
@@ -104,4 +99,56 @@ body {
 
 .gray-text {
   color: $secondFontColor;
+}
+
+@include media(desktop) {
+  .item {
+    max-width: 140px;
+    &__image {
+      width: 140px;
+      height: 140px;
+    }
+  }
+  .main {
+    &__title {
+      font-size: 3rem;
+      margin-bottom: 4rem;
+    }
+  }
+}
+
+@include media(tablet) {
+  .item {
+    max-width: 180px;
+    &__image {
+      width: 180px;
+      height: 180px;
+    }
+  }
+  .list {
+    grid-template-columns: auto auto auto;
+  }
+}
+
+@include media(mobile) {
+  .item {
+    max-width: 200px;
+    &__image {
+      width: 200px;
+      height: 200px;
+    }
+    &__body {
+      line-height: 2rem;
+    }
+    &__subtitle {
+      font-size: 1.1rem;
+    }
+    &__title {
+      font-size: 1.8rem;
+    }
+  }
+  .list {
+    grid-template-columns: auto;
+    grid-row-gap: 3rem;
+  }
 }
