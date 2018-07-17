@@ -3,6 +3,7 @@
 @import "fonts";
 @import "slider";
 
+
 body {
   font-family: 'Open Sans', sans-serif;
 }
@@ -10,6 +11,7 @@ body {
 .main {
   background: url("#{$imagePath}/bg.png");
   padding: 3.5rem 2rem;
+  min-height: 100vh;
   &__title {
     font-size: 3.8rem;
     margin-bottom: 6rem;
@@ -26,11 +28,14 @@ body {
   justify-items: center;
   grid-row-gap: 5rem;
   grid-template-columns: auto auto auto auto auto;
+  &--gridless {display: block;}
   &__item {
     display: flex;
     flex-direction: column;
   }
   &__no-data {
+    font-size: 2rem;
+    color: $firstFontColor;
   }
 }
 
