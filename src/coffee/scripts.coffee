@@ -1,36 +1,42 @@
 class List
   constructor: () ->
     @modalIsOpen = false
-    @docEL = document
+    @docEl = document
     @modalEl = null
-    @itemsEL = null
-    @swiper = null
+    @itemsEl = null
+    @sliderEl = null
+    @isSliderInit = false
 
   init: () ->
-    @modalEl = @docEL.querySelector "[data-modal]"
-    @itemsEL = @docEL.querySelectorAll "[data-item]"
-    @swiper = new Swiper ".swiper-container", {
-      effect: "coverflow",
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      }
-    }
+    @modalEl = @docEl.querySelector "[data-modal]"
+    @itemsEl = @docEl.querySelectorAll "[data-item]"
 
-    for item in @itemsEL
+    for item in @itemsEl
       item.addEventListener "click", (e) =>
         e.preventDefault()
         itemId = e.target.getAttribute("data-item")
         if itemId != null
           @triggerModal(itemId)
-        return
 
   triggerModal: (itemId) ->
     if @modalIsOpen
-      @modalEl.setAttribute("data-modal", "show")
-    else
       @modalEl.setAttribute("data-modal", "hide")
+    else
+      @modalEl.setAttribute("data-modal", "show")
+      @sliderInit()
+      @sliderEl.slideTo(itemId, 500)
     @modalIsOpen = !@modalIsOpen
+
+  sliderInit: () ->
+    if !@isSliderInit
+      @sliderEl = new Swiper ".swiper-container", {
+        effect: "coverflow",
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        }
+      }
+      @isSliderInit = true
 
 
 window.onload = ->
