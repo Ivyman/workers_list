@@ -24,7 +24,7 @@ class List
     else
       @modalEl.setAttribute("data-modal", "show")
       @sliderInit()
-      @sliderEl.slideTo(itemId, 500)
+      @sliderEl.slideTo(itemId, 0)
     @modalIsOpen = !@modalIsOpen
 
   sliderInit: () ->

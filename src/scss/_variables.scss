@@ -9,7 +9,7 @@ $secondFontColor: #808080;
 $max-width: 1300px;
 
 $transition: .3s;
-$boxShadow: 0px 0px 15px 0px rgba(163,163,163,1);
+$boxShadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
 $textShadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
 
 $breakPoints: (
@@ -23,5 +23,13 @@ $breakPoints: (
     @media (max-width: #{map-get($breakPoints, $breakpoint)}) {
       @content;
     }
+  }
+}
+
+@mixin hoverEffect() {
+  opacity: 1;
+  transition: $transition opacity;
+  &:hover {
+    opacity: .7;
   }
 }
