@@ -1,8 +1,12 @@
 .slider(data-modal="hide")
+    a.slider__close(href="#", data-item="")
     .swiper-container
        .swiper-wrapper
-         .swiper-slide Slide 1
-         .swiper-slide Slide 2
-         .swiper-slide Slide 3
+            for item in workers
+                .swiper-slide.align-center
+                    .slide
+                        h4.slide__subtitle= item.position
+                        h2.slide__title= item.name
+
        .swiper-button-prev
        .swiper-button-next
