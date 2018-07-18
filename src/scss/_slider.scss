@@ -6,7 +6,7 @@
   left: 0;
   width: 100vw;
   z-index: 1;
-  display: flex;
+  display: none;
   align-items: center;
   .swiper-button-next, .swiper-button-prev {
     background-size: 200%;
@@ -29,6 +29,9 @@
     display: block;
     position: absolute;
   }
+  &[data-modal*="show"] {
+    display: flex;
+  }
 }
 
 .slide {
@@ -36,6 +39,7 @@
   border: 5px dashed rgba(255,255,255, 0.2);
   padding: 4rem 5rem;
   display: inline-block;
+  word-wrap: break-word;
   &__title {
     font-size: 6rem;
     text-shadow: $textShadow;
@@ -44,5 +48,41 @@
     font-size: 3rem;
     margin-bottom: 1rem;
     text-shadow: $textShadow;
+  }
+}
+
+@include media(desktop) {
+   .slide {
+     padding: 2rem 3rem;
+     &__title {
+       font-size: 4rem;
+     }
+     &__subtitle {
+       font-size: 2rem;
+     }
+   }
+}
+
+@include media(tablet) {
+  .slide {
+    &__title {
+      font-size: 3rem;
+    }
+    &__subtitle {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@include media(mobile) {
+  .slide {
+    padding: 1rem;
+    max-width: 80vw;
+    &__title {
+      font-size: 2.5rem;
+    }
+    &__subtitle {
+      font-size: 1.3rem;
+    }
   }
 }
